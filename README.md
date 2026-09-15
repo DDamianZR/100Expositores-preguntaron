@@ -4,17 +4,17 @@ Juego de preguntas estilo **"100 Mexicanos Dijeron"** (formato *Family Feud*) pe
 
 En vez de responder con la única opción "correcta", cada pregunta tiene varias respuestas válidas ordenadas por popularidad/puntaje (como en el programa de TV). El equipo debe ir adivinando la mayor cantidad posible antes de acumular 3 strikes ❌❌❌.
 
-## 🗂️ Índice
+## 📑 Índice
 
 - [💡 ¿Qué es este proyecto?](#-qué-es-este-proyecto)
 - [🎓 Contexto académico](#-contexto-académico)
 - [📜 Reglas del juego](#-reglas-del-juego)
 - [📚 Temas que cubre](#-temas-que-cubre)
-- [🕹️ Cómo jugar](#-cómo-jugar)
+- [🎲 Cómo jugar](#-cómo-jugar)
 - [📂 Estructura del proyecto](#-estructura-del-proyecto)
-- [🛠️ Tecnologías utilizadas](#-tecnologías-utilizadas)
+- [🔧 Tecnologías utilizadas](#-tecnologías-utilizadas)
 - [📖 Fuentes consultadas](#-fuentes-consultadas)
-- [⚖️ Licencia](#-licencia)
+- [📄 Licencia](#-licencia)
 
 ## 💡 ¿Qué es este proyecto?
 
@@ -56,7 +56,7 @@ Cada ronda corresponde a una pregunta con varias respuestas posibles, ordenadas 
 
 El detalle completo de cada respuesta —incluyendo su explicación conceptual y la cita bibliográfica de la que proviene— vive en [`respuestas.json`](respuestas.json), que funciona como la "fuente de la verdad" del contenido académico del juego.
 
-## 🕹️ Cómo jugar
+## 🎲 Cómo jugar
 
 Hay dos versiones del mismo juego, pensadas para necesidades distintas:
 
@@ -103,7 +103,7 @@ El componente maneja todo su propio estado (ronda actual, strikes, puntaje, etc.
 
 > 💡 Nota: las dos versiones jugables (HTML y JSX) incluyen cada una su propio arreglo de preguntas y respuestas de forma independiente; `respuestas.json` es la referencia "ampliada" con las explicaciones y fuentes que sustentan cada respuesta.
 
-## 🛠️ Tecnologías utilizadas
+## 🔧 Tecnologías utilizadas
 
 - 🌐 **HTML5 + CSS3 + JavaScript vanilla** — versión standalone, sin dependencias ni build step.
 - ⚛️ **React** (hooks: `useState`, `useCallback`, `useEffect`, `useRef`) — versión componente.
@@ -118,6 +118,6 @@ El contenido de las preguntas está basado en:
 - 📘 S. Hernández y D. Duana, «Métodos teóricos de la investigación», Universidad Autónoma del Estado de Hidalgo, 2018.
 - 📘 F. N. Rodríguez C., «Generalidades acerca de las técnicas de investigación cuantitativa», *Paradigmas*, 2007.
 
-## ⚖️ Licencia
+## 📄 Licencia
 
 🚧 Por definir — próximamente se agregará una licencia de código abierto.
