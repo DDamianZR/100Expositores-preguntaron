@@ -4,13 +4,19 @@ Juego de preguntas estilo **"100 Mexicanos Dijeron"** (formato *Family Feud*) pe
 
 En vez de responder con la única opción "correcta", cada pregunta tiene varias respuestas válidas ordenadas por popularidad/puntaje (como en el programa de TV). El equipo debe ir adivinando la mayor cantidad posible antes de acumular 3 strikes ❌❌❌.
 
+### 🚀 [Juega la versión en línea aquí →](https://100-expositores-preguntaron.vercel.app)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/DDamianZR/100Expositores-preguntaron)
+
 ## 📑 Índice
 
+- [🚀 Jugar en línea](https://100-expositores-preguntaron.vercel.app)
 - [💡 ¿Qué es este proyecto?](#-qué-es-este-proyecto)
 - [🎓 Contexto académico](#-contexto-académico)
 - [📜 Reglas del juego](#-reglas-del-juego)
 - [📚 Temas que cubre](#-temas-que-cubre)
 - [🎲 Cómo jugar](#-cómo-jugar)
+- [🌐 Despliegue en Vercel](#-despliegue-en-vercel)
 - [📂 Estructura del proyecto](#-estructura-del-proyecto)
 - [🔧 Tecnologías utilizadas](#-tecnologías-utilizadas)
 - [📖 Fuentes consultadas](#-fuentes-consultadas)
@@ -62,10 +68,10 @@ Hay dos versiones del mismo juego, pensadas para necesidades distintas:
 
 ### 🌐 Opción 1 — Versión HTML (recomendada para presentar en clase)
 
-Es un archivo **autocontenido**: no necesita instalar nada, ni servidor, ni conexión a internet (salvo para cargar las tipografías de Google Fonts).
+Es un archivo **autocontenido**: no necesita instalar nada, ni servidor, ni conexión a internet (salvo para cargar las tipografías de Google Fonts). Es exactamente el mismo archivo que corre en [la versión desplegada en Vercel](https://100-expositores-preguntaron.vercel.app).
 
 1. Descarga o clona el repositorio.
-2. Haz doble clic en [`100-metodologos-dijeron.html`](100-metodologos-dijeron.html) para abrirlo con tu navegador.
+2. Haz doble clic en [`index.html`](index.html) para abrirlo con tu navegador.
 3. Proyecta la pantalla y ¡a jugar! 🎉
 
 ### ⚛️ Opción 2 — Versión React (para integrarlo en otro proyecto)
@@ -90,11 +96,25 @@ export default function App() {
 
 El componente maneja todo su propio estado (ronda actual, strikes, puntaje, etc.) con los hooks de React, así que no requiere props ni configuración adicional.
 
+## 🌐 Despliegue en Vercel
+
+El sitio en línea (https://100-expositores-preguntaron.vercel.app) despliega directamente [`index.html`](index.html) como sitio estático, sin ningún paso de build.
+
+- No hay `package.json`, así que Vercel usa el framework preset **"Other"** y sirve la raíz del repositorio tal cual.
+- Al no existir compilación, no hay dependencias que instalar ni comandos que puedan fallar: lo que ves en el repositorio es exactamente lo que se publica.
+- Cada `git push` a `main` dispara un nuevo deploy automático.
+
+Para desplegar tu propia copia:
+
+1. Haz un fork de este repositorio (o usa el botón *Deploy with Vercel* al inicio de este README).
+2. Impórtalo en [vercel.com/new](https://vercel.com/new).
+3. Deja la configuración por defecto y despliega — no necesitas definir build command, output directory ni variables de entorno.
+
 ## 📂 Estructura del proyecto
 
 ```
 .
-├── 🎮 100-metodologos-dijeron.html   # Versión standalone jugable (HTML + CSS + JS vanilla)
+├── 🎮 index.html                     # Versión jugable (HTML + CSS + JS vanilla) — entry point en Vercel
 ├── ⚛️ 100-metodologos-dijeron.jsx    # Versión como componente de React
 ├── 🗃️ respuestas.json                # Fuente de contenido: preguntas, respuestas, puntajes,
 │                                      # explicaciones y referencias bibliográficas
