@@ -1,0 +1,134 @@
+{
+  "juego": "100 Metodólogos Dijeron — ESCOM Edition",
+  "materia": "Metodología de la Investigación y Divulgación Científica",
+  "tema_fuente": "1.3.2 Dimensiones de la investigación y 1.3.3 Métodos generales de la investigación",
+  "reglas": {
+    "equipos": 2,
+    "rondas": 10,
+    "strikes_por_ronda": 3,
+    "regla_de_robo": "Al llegar a 3 strikes, el equipo contrario puede intentar UNA respuesta para robar todos los puntos acumulados de la ronda.",
+    "puntuacion": "Cada respuesta correcta suma sus puntos al equipo que respondió. Los puntos se consolidan al terminar la ronda."
+  },
+  "rondas": [
+    {
+      "numero": 1,
+      "etiqueta": "Sirvent · Los 3 planos",
+      "pregunta": "Menciona una de las TRES DIMENSIONES del proceso metodológico según María Teresa Sirvent",
+      "respuestas": [
+        { "posicion": 1, "texto": "Epistemológica", "puntos": 40, "explicacion": "Plano donde se define conceptualmente el objeto de estudio y se construyen las bases teóricas: problema, objetivos, marco teórico, hipótesis." },
+        { "posicion": 2, "texto": "Estrategia general", "puntos": 35, "explicacion": "Arquitectura de la investigación: tipo o alcance, diseño (estructurado o emergente), universo/población/muestra." },
+        { "posicion": 3, "texto": "Técnicas de obtención y análisis", "puntos": 25, "explicacion": "Plano procedimental e instrumental: distinción método/instrumento/técnica y aplicación concreta." }
+      ]
+    },
+    {
+      "numero": 2,
+      "etiqueta": "Sirvent · Dimensión epistemológica",
+      "pregunta": "¿Qué COMPONENTE forma parte de la dimensión epistemológica de Sirvent?",
+      "respuestas": [
+        { "posicion": 1, "texto": "Planteamiento del problema", "puntos": 24, "explicacion": "Pregunta de investigación que denota un vacío, contradicción o anomalía." },
+        { "posicion": 2, "texto": "Hipótesis", "puntos": 22, "explicacion": "Enunciados tentativos que anticipan la respuesta y orientan la contrastación empírica." },
+        { "posicion": 3, "texto": "Marco teórico / encuadre conceptual", "puntos": 20, "explicacion": "Teorías, categorías y supuestos paradigmáticos que enmarcan el estudio." },
+        { "posicion": 4, "texto": "Objetivos de la investigación", "puntos": 18, "explicacion": "Enunciados rigurosos que marcan los nudos cognitivos a resolver." },
+        { "posicion": 5, "texto": "Delimitación del objeto de estudio", "puntos": 11, "explicacion": "Recortar la realidad social para definir qué fenómeno se problematizará." },
+        { "posicion": 6, "texto": "Relevancia científica y social", "puntos": 5, "explicacion": "Justificación lógica y teórica de por qué producir este conocimiento." }
+      ]
+    },
+    {
+      "numero": 3,
+      "etiqueta": "Tipos por profundidad",
+      "pregunta": "Menciona un TIPO de investigación según su PROFUNDIDAD o alcance",
+      "respuestas": [
+        { "posicion": 1, "texto": "Descriptiva", "puntos": 28, "explicacion": "Caracterización estructural de las propiedades de las unidades de análisis." },
+        { "posicion": 2, "texto": "Exploratoria", "puntos": 25, "explicacion": "Primer acercamiento a fenómenos poco conocidos." },
+        { "posicion": 3, "texto": "Explicativa", "puntos": 22, "explicacion": "Determinación de relaciones causales." },
+        { "posicion": 4, "texto": "Correlacional", "puntos": 15, "explicacion": "Medición del grado de asociación NO causal entre variables." },
+        { "posicion": 5, "texto": "Etnográfica", "puntos": 10, "explicacion": "Comprensión holística, interpretativa y situada de prácticas socioculturales complejas." }
+      ]
+    },
+    {
+      "numero": 4,
+      "etiqueta": "Los que 'piensan la teoría'",
+      "pregunta": "Menciona un MÉTODO LÓGICO o TEÓRICO de la investigación",
+      "respuestas": [
+        { "posicion": 1, "texto": "Hipotético-deductivo", "puntos": 30, "explicacion": "Observa → conjetura hipótesis → deduce predicciones → contrasta empíricamente." },
+        { "posicion": 2, "texto": "Inductivo-deductivo", "puntos": 25, "explicacion": "De los casos particulares a lo general y de vuelta a lo particular en una inferencia continua." },
+        { "posicion": 3, "texto": "Analítico-sintético", "puntos": 22, "explicacion": "Descomponer el objeto en partes (análisis) y luego reintegrarlo unificado (síntesis)." },
+        { "posicion": 4, "texto": "Inductivo", "puntos": 13, "explicacion": "De lo particular a lo general (principios, leyes)." },
+        { "posicion": 5, "texto": "Deductivo", "puntos": 10, "explicacion": "De lo general (leyes, axiomas) a lo particular." }
+      ]
+    },
+    {
+      "numero": 5,
+      "etiqueta": "Orozco Livia · Las 3 dimensiones",
+      "pregunta": "Menciona una de las TRES DIMENSIONES de la metodología según Víctor Orozco Livia",
+      "respuestas": [
+        { "posicion": 1, "texto": "Presupuestos ex-ante", "puntos": 35, "explicacion": "Fundamentos filosóficos y epistemológicos previos a la investigación fáctica." },
+        { "posicion": 2, "texto": "Lineamientos de la investigación", "puntos": 35, "explicacion": "Ejecución fáctica: problema, marco teórico, hipótesis, técnica de observación, métodos lógicos." },
+        { "posicion": 3, "texto": "Método de exposición", "puntos": 30, "explicacion": "Comunicación formal de los hallazgos a la comunidad científica; dimensión constitutiva, no apéndice." }
+      ]
+    },
+    {
+      "numero": 6,
+      "etiqueta": "Criterios de clasificación",
+      "pregunta": "Menciona un CRITERIO para clasificar tipos de investigación",
+      "respuestas": [
+        { "posicion": 1, "texto": "Profundidad", "puntos": 25, "explicacion": "Exploratoria / descriptiva / correlacional / explicativa." },
+        { "posicion": 2, "texto": "Medición (cuanti / cuali / mixta)", "puntos": 22, "explicacion": "Clasifica por el tipo de datos que produce." },
+        { "posicion": 3, "texto": "Manejo de variables", "puntos": 18, "explicacion": "Experimental (manipula) vs. no experimental (observa en contexto natural)." },
+        { "posicion": 4, "texto": "Fuente de datos", "puntos": 15, "explicacion": "Documental (secundarias), de campo (primarias) o mixtas." },
+        { "posicion": 5, "texto": "Extensión", "puntos": 12, "explicacion": "Alcance poblacional/territorial y representatividad de la muestra." },
+        { "posicion": 6, "texto": "Objetivos (básica / aplicada)", "puntos": 8, "explicacion": "Propósito último: básica, aplicada o de intervención." }
+      ]
+    },
+    {
+      "numero": 7,
+      "etiqueta": "Métodos empíricos",
+      "pregunta": "Menciona un MÉTODO EMPÍRICO de investigación",
+      "respuestas": [
+        { "posicion": 1, "texto": "Experimental", "puntos": 40, "explicacion": "Condiciones artificiales/controladas; aísla variables para probar causa-efecto." },
+        { "posicion": 2, "texto": "Observacional", "puntos": 35, "explicacion": "Registro sistemático del objeto en su escenario natural, sin manipulación." },
+        { "posicion": 3, "texto": "Análisis de contenido", "puntos": 25, "explicacion": "Analiza objetivamente actos de comunicación (oral/escrita/audiovisual) para revelar significados." }
+      ]
+    },
+    {
+      "numero": 8,
+      "etiqueta": "Cualitativas de campo",
+      "pregunta": "Menciona una TÉCNICA CUALITATIVA de obtención de información",
+      "respuestas": [
+        { "posicion": 1, "texto": "Entrevista en profundidad", "puntos": 30, "explicacion": "Abierta o semiestructurada; explora significados y experiencias." },
+        { "posicion": 2, "texto": "Observación participante", "puntos": 28, "explicacion": "El investigador se involucra en la situación observada." },
+        { "posicion": 3, "texto": "Registros etnográficos de campo", "puntos": 22, "explicacion": "Diarios, notas y registros del trabajo etnográfico." },
+        { "posicion": 4, "texto": "Recopilación documental / archivo", "puntos": 20, "explicacion": "Reunir y analizar documentos y fuentes de archivo." }
+      ]
+    },
+    {
+      "numero": 9,
+      "etiqueta": "Estructurales y de tránsito conceptual",
+      "pregunta": "Menciona un MÉTODO ESTRUCTURAL o de TRÁNSITO CONCEPTUAL",
+      "respuestas": [
+        { "posicion": 1, "texto": "Histórico-lógico", "puntos": 28, "explicacion": "Lo histórico traza la evolución cronológica; lo lógico reproduce las leyes estructurales sin detalles secundarios." },
+        { "posicion": 2, "texto": "Abstracto-concreto", "puntos": 25, "explicacion": "Del concreto sensible (percepciones directas) al abstracto racional (conceptos y generalizaciones)." },
+        { "posicion": 3, "texto": "Sistémico-estructural-funcional", "puntos": 22, "explicacion": "Aborda el objeto como estructura sistémica de eslabones jerarquizados." },
+        { "posicion": 4, "texto": "Genético", "puntos": 15, "explicacion": "Busca la 'célula básica' u origen del objeto para descubrir sus leyes de desarrollo." },
+        { "posicion": 5, "texto": "Modelación", "puntos": 10, "explicacion": "Crea una simplificación (modelo) que esquematiza propiedades para estudio operativo." }
+      ]
+    },
+    {
+      "numero": 10,
+      "etiqueta": "Orozco · Presupuestos ex-ante",
+      "pregunta": "Menciona un PRESUPUESTO EX-ANTE según Orozco Livia",
+      "respuestas": [
+        { "posicion": 1, "texto": "Principios filosóficos", "puntos": 30, "explicacion": "Raciocinio crítico e integral del mundo basado en la ciencia." },
+        { "posicion": 2, "texto": "Principios epistemológicos", "puntos": 28, "explicacion": "Comprensión rigurosa de qué es el conocimiento y su relación con la realidad empírica." },
+        { "posicion": 3, "texto": "Concepción científica del mundo", "puntos": 22, "explicacion": "Asimilación previa del científico sobre el desarrollo histórico de la ciencia." },
+        { "posicion": 4, "texto": "Ideología del investigador", "puntos": 20, "explicacion": "Compromisos y posiciones desde donde se delimita el objeto y se interpreta." }
+      ]
+    }
+  ],
+  "referencias_al_texto_fuente": {
+    "sirvent": "M. T. Sirvent y L. Rigal, La investigación social en educación, Miño y Dávila, 2010.",
+    "orozco_livia": "V. Orozco Livia, «Dimensiones de la Metodología de Investigación», Pensamiento Crítico, no. 7, pp. 13-20, 2007.",
+    "metodos_teoricos": "S. Hernández y D. Duana, «Métodos teóricos de la investigación», Univ. Autónoma del Estado de Hidalgo, 2018.",
+    "tecnicas": "F. N. Rodríguez C., «Generalidades acerca de las técnicas de investigación cuantitativa», Paradigmas, 2007."
+  }
+}

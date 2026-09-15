@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Metodólogos Dijeron — ESCOM Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-1: #0a0022;
+    --bg-2: #1a0040;
+    --bg-3: #050014;
+    --gold: #FFD700;
+    --gold-2: #FFA500;
+    --cyan: #00E5FF;
+    --cyan-2: #00B8D4;
+    --magenta: #FF006E;
+    --magenta-2: #C2185B;
+    --green: #00FF88;
+    --red: #FF1744;
+    --white: #FFFFFF;
+    --paper: #FFF8DC;
+    --shadow-neon-gold: 0 0 20px rgba(255,215,0,.8), 0 0 40px rgba(255,215,0,.5), 0 0 60px rgba(255,165,0,.3);
+    --shadow-neon-cyan: 0 0 20px rgba(0,229,255,.8), 0 0 40px rgba(0,229,255,.5);
+    --shadow-neon-magenta: 0 0 20px rgba(255,0,110,.8), 0 0 40px rgba(255,0,110,.5);
+    --font-display: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+    --font-chunky: 'Bungee', 'Impact', sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: var(--font-body);
+    color: var(--white);
+    background: var(--bg-3);
+    user-select: none;
+  }
+
+  /* Fondo animado con degradado y estrellas */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255,0,110,.25), transparent 55%),
+      radial-gradient(ellipse at 80% 15%, rgba(0,229,255,.22), transparent 55%),
+      radial-gradient(ellipse at 50% 90%, rgba(255,215,0,.20), transparent 60%),
+      linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+    z-index: -3;
+    animation: bgShift 22s ease-in-out infinite alternate;
+  }
+  @keyframes bgShift {
+    0%   { filter: hue-rotate(0deg) brightness(1); }
+    100% { filter: hue-rotate(35deg) brightness(1.12); }
+  }
+
+  /* Estrellas parpadeando */
+  #stars {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: .9;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: .2; transform: scale(.8); }
+    50%      { opacity: 1;  transform: scale(1.3); }
+  }
+
+  /* Emojis flotantes de ciencia */
+  #floaters { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; }
+  .floater {
+    position: absolute;
+    font-size: 1.4rem;
+    opacity: .12;
+    animation: floatUp linear infinite;
+    filter: blur(.4px);
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); }
+    100% { transform: translateY(-15vh)  rotate(360deg); }
+  }
+
+  /* Screen shake global (para strikes) */
+  body.shake { animation: shakeIt .4s cubic-bezier(.36,.07,.19,.97); }
+  @keyframes shakeIt {
+    10%, 90%  { transform: translate3d(-2px, 0, 0); }
+    20%, 80%  { transform: translate3d(4px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+    40%, 60%  { transform: translate3d(6px, 0, 0); }
+  }
+
+  /* Rejilla retro estilo synthwave */
+  #grid {
+    position: fixed;
+    inset: auto 0 0 0;
+    height: 40vh;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, rgba(10,0,34,.9), transparent 80%),
+      repeating-linear-gradient(90deg, transparent 0, transparent 60px, rgba(255,215,0,.14) 60px, rgba(255,215,0,.14) 61px),
+      repeating-linear-gradient(0deg,  transparent 0, transparent 40px, rgba(0,229,255,.12) 40px, rgba(0,229,255,.12) 41px);
+    transform: perspective(400px) rotateX(60deg);
+    transform-origin: bottom;
+  }
+
+  #app {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 12px 40px;
+  }
+
+  /* ================= HEADER ================= */
+  header.top {
+    width: 100%;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: stretch;
+    margin-bottom: 14px;
+  }
+
+  .scoreboard {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0,0,0,.55), rgba(0,0,0,.25));
+    border-radius: 20px;
+    padding: 14px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .scoreboard::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 20px;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--team-color, var(--cyan)), rgba(255,255,255,.2), var(--team-color, var(--cyan)));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+  }
+  .scoreboard.team-1 { --team-color: var(--cyan); }
+  .scoreboard.team-2 { --team-color: var(--magenta); }
+  .scoreboard.active {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 0 40px var(--team-color), 0 0 80px var(--team-color), inset 0 0 30px rgba(255,255,255,.1);
+    animation: pulseGlow 1.4s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%,100% { filter: brightness(1); }
+    50%     { filter: brightness(1.25); }
+  }
+  .team-row { display: flex; align-items: center; gap: 12px; }
+  .team-emoji {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 12px var(--team-color));
+    animation: floaty 3s ease-in-out infinite;
+  }
+  @keyframes floaty {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%     { transform: translateY(-6px) rotate(3deg); }
+  }
+  .team-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.4vw, 1.8rem);
+    letter-spacing: .04em;
+    color: var(--white);
+    text-shadow: 0 0 12px var(--team-color);
+    line-height: 1;
+  }
+  .team-score {
+    font-family: var(--font-chunky);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    color: var(--gold);
+    text-shadow: var(--shadow-neon-gold);
+    line-height: 1;
+    letter-spacing: .02em;
+    display: inline-block;
+    transition: transform .25s;
+  }
+  .team-score.bump { animation: bump .5s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes bump {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.45) rotate(-6deg); color: var(--green); }
+    100% { transform: scale(1); }
+  }
+  .team-score-row { display: flex; align-items: baseline; gap: 8px; margin-top: 6px; }
+  .team-round-pts { font-size: .8rem; opacity: .8; color: var(--paper); }
+  .active-badge {
+    position: absolute; top: -10px; right: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #000; padding: 3px 12px; border-radius: 999px;
+    font-family: var(--font-chunky); font-size: .75rem;
+    box-shadow: 0 0 12px var(--gold);
+    transform: rotate(3deg);
+    animation: wobble 1.6s ease-in-out infinite;
+  }
+  @keyframes wobble { 0%,100% { transform: rotate(3deg);} 50% { transform: rotate(-3deg);} }
+
+  /* Logo central */
+  .logo-wrap {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 0 6px;
+  }
+  .logo-main {
+    font-family: var(--font-chunky);
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    background: linear-gradient(135deg, var(--gold) 0%, #fff9c4 40%, var(--gold-2) 60%, var(--gold) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: .03em;
+    line-height: .95;
+    text-shadow: var(--shadow-neon-gold);
+    filter: drop-shadow(0 0 12px rgba(255,215,0,.7));
+    animation: neonPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes neonPulse {
+    0%,100% { filter: drop-shadow(0 0 8px rgba(255,215,0,.6)); }
+    50%     { filter: drop-shadow(0 0 20px rgba(255,215,0,1)); }
+  }
+  .logo-sub {
+    font-family: var(--font-display);
+    letter-spacing: .3em;
+    font-size: .8rem;
+    color: var(--cyan);
+    text-shadow: 0 0 10px var(--cyan);
+    margin-top: 4px;
+  }
+  .round-chip {
+    margin-top: 8px;
+    background: rgba(0,0,0,.45);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-chunky);
+    font-size: .95rem;
+    padding: 4px 14px;
+    border-radius: 999px;
+    box-shadow: inset 0 0 12px rgba(255,215,0,.3), 0 0 12px rgba(255,215,0,.4);
+  }
+  .double-chip {
+    margin-top: 6px;
+    background: linear-gradient(135deg, var(--magenta), var(--gold));
+    border: 2px solid #fff;
+    color: #fff;
+    font-family: var(--font-chunky);
+    font-size: .85rem;
+    padding: 3px 14px;
+    border-radius: 999px;
+    box-shadow: 0 0 18px var(--magenta);
+    animation: wobble 1.4s ease-in-out infinite;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+  .pool-chip {
+    margin-top: 6px;
+    background: rgba(0,255,136,.15);
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-family: var(--font-chunky);
+    font-size: .85rem;
+    padding: 3px 14px;
+    border-radius: 999px;
+    box-shadow: 0 0 14px rgba(0,255,136,.5);
+    text-shadow: 0 0 6px var(--green);
+  }
+
+  /* Top-right utility buttons */
+  .top-utils {
+    position: fixed; top: 12px; right: 12px;
+    display: flex; gap: 8px;
+    z-index: 50;
+  }
+  .util-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.55);
+    border: 2px solid rgba(255,215,0,.5);
+    color: var(--gold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .15s, box-shadow .15s, background .2s;
+    backdrop-filter: blur(6px);
+  }
+  .util-btn:hover { transform: scale(1.1); box-shadow: 0 0 16px var(--gold); }
+
+  /* Modal (reglas) */
+  .modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200;
+    padding: 20px;
+    animation: fadeIn .2s;
+  }
+  .modal-card {
+    background: linear-gradient(160deg, #12053a, #1a0055);
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    padding: 26px 30px;
+    max-width: 640px;
+    width: 100%;
+    box-shadow: var(--shadow-neon-gold);
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .modal-title {
+    font-family: var(--font-chunky);
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-shadow: 0 0 12px var(--gold);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .modal-body { font-family: var(--font-body); line-height: 1.55; color: var(--paper); font-size: .96rem; }
+  .modal-body b { color: var(--gold); }
+  .modal-body ul { padding-left: 22px; margin-top: 8px; }
+  .modal-body li { margin: 4px 0; }
+  .modal-close-row { display: flex; justify-content: center; margin-top: 18px; }
+
+  /* Round transition splash */
+  .round-splash {
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at center, rgba(10,0,34,.98), rgba(0,0,0,.9));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 300;
+    animation: splashFade .3s;
+  }
+  .splash-num {
+    font-family: var(--font-chunky);
+    font-size: clamp(4rem, 15vw, 12rem);
+    background: linear-gradient(135deg, var(--gold), #fff, var(--gold-2));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px var(--gold));
+    animation: splashZoom .8s cubic-bezier(.34,1.56,.64,1);
+    line-height: .9;
+  }
+  .splash-label {
+    font-family: var(--font-display);
+    letter-spacing: .3em;
+    font-size: 1.4rem;
+    color: var(--cyan);
+    text-shadow: 0 0 12px var(--cyan);
+    margin-bottom: 10px;
+  }
+  .splash-topic {
+    margin-top: 20px;
+    font-family: var(--font-chunky);
+    color: var(--white);
+    font-size: clamp(1.1rem, 3vw, 2rem);
+    max-width: 80vw;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(255,215,0,.6);
+    animation: splashSlide .8s .2s both;
+  }
+  @keyframes splashFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes splashZoom {
+    0%   { transform: scale(.2) rotate(-15deg); opacity: 0; }
+    60%  { transform: scale(1.2) rotate(6deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes splashSlide {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Round win banner */
+  .round-win-banner {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #000;
+    font-family: var(--font-chunky);
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    padding: 22px 44px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 60px var(--gold), 0 0 120px rgba(255,215,0,.4);
+    z-index: 150;
+    animation: winBanner 2.6s ease-out forwards;
+    letter-spacing: .04em;
+    border: 4px solid #fff;
+  }
+  @keyframes winBanner {
+    0%   { transform: translate(-50%, -50%) scale(0) rotate(-20deg); opacity: 0; }
+    20%  { transform: translate(-50%, -50%) scale(1.15) rotate(4deg); opacity: 1; }
+    40%  { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+    85%  { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.1) rotate(0deg); opacity: 0; }
+  }
+
+  /* ================= MAIN AREA ================= */
+  main {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .question-card {
+    width: 100%;
+    max-width: 1200px;
+    background:
+      radial-gradient(ellipse at top, rgba(255,215,0,.15), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.4));
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: var(--shadow-neon-gold), inset 0 0 30px rgba(255,215,0,.1);
+    position: relative;
+    animation: questionIn .6s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes questionIn {
+    from { opacity: 0; transform: translateY(-20px) scale(.9); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .question-card::before, .question-card::after {
+    content: "★";
+    position: absolute; top: 50%;
+    color: var(--gold);
+    font-size: 1.8rem;
+    transform: translateY(-50%);
+    text-shadow: 0 0 12px var(--gold);
+    animation: sparkle 2s ease-in-out infinite;
+  }
+  .question-card::before { left: 14px; }
+  .question-card::after  { right: 14px; animation-delay: 1s; }
+  @keyframes sparkle {
+    0%,100% { transform: translateY(-50%) rotate(0deg) scale(1); opacity: .8; }
+    50%     { transform: translateY(-50%) rotate(180deg) scale(1.3); opacity: 1; }
+  }
+  .question-label {
+    font-family: var(--font-display);
+    letter-spacing: .28em;
+    font-size: .75rem;
+    color: var(--cyan);
+    text-shadow: 0 0 8px var(--cyan);
+  }
+  .question-text {
+    font-family: var(--font-chunky);
+    font-size: clamp(1.15rem, 2.4vw, 1.85rem);
+    color: var(--white);
+    margin-top: 6px;
+    line-height: 1.25;
+    text-shadow: 0 2px 12px rgba(0,0,0,.6);
+  }
+
+  /* Panel de respuestas */
+  .board {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    perspective: 1200px;
+  }
+  .board.single-col { grid-template-columns: 1fr; max-width: 900px; }
+
+  .answer {
+    position: relative;
+    height: 82px;
+    border-radius: 14px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform .8s cubic-bezier(.65,-0.15,.35,1.15), box-shadow .3s;
+  }
+  .answer:hover:not(.revealed) .face-front { box-shadow: 0 0 24px var(--cyan), inset 0 0 20px rgba(0,229,255,.3); }
+  .answer.revealed { transform: rotateY(180deg); }
+  .answer .face {
+    position: absolute; inset: 0;
+    border-radius: 14px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex; align-items: center;
+    padding: 0 18px;
+    overflow: hidden;
+  }
+  .face-front {
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 8px, transparent 8px 16px),
+      linear-gradient(135deg, #1a1550, #0a0033);
+    border: 2px solid rgba(0,229,255,.35);
+    box-shadow: inset 0 0 20px rgba(0,229,255,.15);
+    transition: box-shadow .3s;
+  }
+  .face-back {
+    background: linear-gradient(135deg, #164d99 0%, #2563eb 50%, #1e3a8a 100%);
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 24px rgba(255,215,0,.6), inset 0 0 24px rgba(255,215,0,.2);
+    transform: rotateY(180deg);
+  }
+  .num-circle {
+    flex-shrink: 0;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-chunky); font-size: 1.4rem;
+    color: var(--gold);
+    background: rgba(0,0,0,.4);
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    margin-right: 14px;
+  }
+  .face-front .hidden-marks {
+    flex: 1;
+    letter-spacing: .5em;
+    color: rgba(0,229,255,.35);
+    font-family: var(--font-chunky);
+    font-size: 1.3rem;
+  }
+  .face-back .answer-text {
+    flex: 1;
+    font-family: var(--font-display);
+    letter-spacing: .04em;
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    color: var(--white);
+    line-height: 1.1;
+    text-shadow: 0 2px 6px rgba(0,0,0,.6);
+  }
+  .face-back .answer-pts {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #000;
+    font-family: var(--font-chunky);
+    font-size: 1.4rem;
+    padding: 6px 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 16px var(--gold);
+    margin-left: 10px;
+  }
+
+  /* Strikes fila */
+  .strikes {
+    display: flex; gap: 18px;
+    justify-content: center;
+    margin: 6px 0 4px;
+  }
+  .strike-slot {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-chunky); font-size: 2rem;
+    color: rgba(255,255,255,.15);
+    background: rgba(0,0,0,.35);
+    border: 3px solid rgba(255,255,255,.15);
+    transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .strike-slot.on {
+    color: var(--red);
+    border-color: var(--red);
+    background: rgba(255,23,68,.15);
+    box-shadow: 0 0 24px var(--red), inset 0 0 16px rgba(255,23,68,.4);
+    animation: strikeShake .5s cubic-bezier(.36,.07,.19,.97);
+  }
+  @keyframes strikeShake {
+    0%,100% { transform: translateX(0) rotate(0); }
+    20%     { transform: translateX(-10px) rotate(-8deg); }
+    40%     { transform: translateX(10px)  rotate(8deg); }
+    60%     { transform: translateX(-6px)  rotate(-4deg); }
+    80%     { transform: translateX(6px)   rotate(4deg); }
+  }
+
+  /* Controles */
+  .controls {
+    width: 100%; max-width: 1200px;
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn {
+    font-family: var(--font-chunky);
+    font-size: 1rem;
+    padding: 12px 22px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: .04em;
+    color: #fff;
+    transition: transform .15s, box-shadow .2s, filter .2s;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn:hover { transform: translateY(-3px) scale(1.05); filter: brightness(1.15); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+  .btn-strike {
+    background: linear-gradient(135deg, var(--red), #B71C1C);
+    box-shadow: 0 4px 16px rgba(255,23,68,.5), 0 0 24px rgba(255,23,68,.3);
+  }
+  .btn-team {
+    background: linear-gradient(135deg, var(--team-color, var(--cyan)), rgba(0,0,0,.4));
+    box-shadow: 0 4px 16px var(--team-color, var(--cyan));
+  }
+  .btn-team.t1 { --team-color: var(--cyan); }
+  .btn-team.t2 { --team-color: var(--magenta); }
+  .btn-team.active {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+    box-shadow: 0 0 24px var(--gold);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-2));
+    color: #000;
+    box-shadow: var(--shadow-neon-gold);
+    font-size: 1.15rem;
+    padding: 14px 30px;
+  }
+  .btn-steal {
+    background: linear-gradient(135deg, var(--magenta), var(--gold));
+    color: #000;
+    animation: stealPulse 1.2s ease-in-out infinite;
+    box-shadow: 0 0 30px var(--magenta);
+  }
+  @keyframes stealPulse {
+    0%,100% { box-shadow: 0 0 20px var(--magenta), 0 0 40px var(--gold); }
+    50%     { box-shadow: 0 0 40px var(--gold), 0 0 80px var(--magenta); }
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.2);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: .85rem;
+    padding: 8px 14px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .input-row {
+    display: flex; gap: 8px; width: 100%; max-width: 700px;
+    margin-top: 4px;
+  }
+  .input-row input {
+    flex: 1;
+    background: rgba(0,0,0,.5);
+    border: 2px solid rgba(0,229,255,.4);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .input-row input:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px rgba(0,229,255,.6);
+  }
+
+  .feedback {
+    min-height: 34px;
+    font-family: var(--font-chunky);
+    font-size: 1.2rem;
+    text-align: center;
+    letter-spacing: .04em;
+    transition: opacity .2s;
+  }
+  .feedback.correct { color: var(--green); text-shadow: 0 0 16px var(--green); animation: pop .4s; }
+  .feedback.wrong { color: var(--red); text-shadow: 0 0 16px var(--red); animation: pop .4s; }
+  .feedback.perfect { color: var(--gold); text-shadow: 0 0 20px var(--gold); animation: pop .4s; }
+  @keyframes pop {
+    0% { transform: scale(.6); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Overlays */
+  .overlay {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,.75);
+    z-index: 100;
+    animation: fadeIn .2s;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .giant-x {
+    font-family: var(--font-chunky);
+    color: var(--red);
+    font-size: min(80vw, 60vh);
+    text-shadow: 0 0 60px var(--red), 0 0 120px var(--red), 0 0 200px #ff6b6b;
+    animation: xGrow .7s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes xGrow {
+    0%   { transform: scale(0) rotate(-180deg); opacity: 0; }
+    60%  { transform: scale(1.15) rotate(15deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  /* Confeti */
+  #confetti {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 90;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 12px; height: 22px;
+    top: -30px;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    to {
+      transform: translateY(110vh) rotate(720deg);
+    }
+  }
+
+  /* ================= TITLE SCREEN ================= */
+  .title-screen {
+    min-height: 92vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; gap: 20px;
+    text-align: center;
+  }
+  .title-huge {
+    font-family: var(--font-chunky);
+    font-size: clamp(2.4rem, 8vw, 6rem);
+    background: linear-gradient(135deg, var(--gold), #fff9c4, var(--gold-2));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: .95;
+    filter: drop-shadow(0 0 30px rgba(255,215,0,.8));
+    animation: titleFloat 3s ease-in-out infinite;
+  }
+  @keyframes titleFloat {
+    0%,100% { transform: translateY(0) rotate(-1deg); }
+    50%     { transform: translateY(-10px) rotate(1deg); }
+  }
+  .title-badge {
+    background: linear-gradient(135deg, var(--magenta), var(--cyan));
+    padding: 6px 24px;
+    border-radius: 999px;
+    font-family: var(--font-chunky);
+    font-size: 1rem;
+    letter-spacing: .1em;
+    box-shadow: 0 0 24px rgba(255,0,110,.6);
+    animation: badgeRot 4s linear infinite;
+    display: inline-block;
+  }
+  @keyframes badgeRot {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+  .title-tag {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--paper);
+    max-width: 620px;
+    opacity: .9;
+    line-height: 1.5;
+  }
+  .teams-setup {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .team-input-card {
+    background: rgba(0,0,0,.5);
+    border: 3px solid var(--team-color, var(--cyan));
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 30px var(--team-color, var(--cyan));
+  }
+  .team-input-card.t1 { --team-color: var(--cyan); }
+  .team-input-card.t2 { --team-color: var(--magenta); }
+  .team-input-card .emoji-picker {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .emoji-btn {
+    width: 44px; height: 44px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: rgba(255,255,255,.05);
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .emoji-btn:hover { transform: scale(1.15); background: rgba(255,255,255,.15); }
+  .emoji-btn.selected {
+    border-color: var(--gold);
+    box-shadow: 0 0 16px var(--gold);
+    background: rgba(255,215,0,.2);
+  }
+  .team-input-card input {
+    width: 100%;
+    background: rgba(0,0,0,.4);
+    border: 2px solid var(--team-color, var(--cyan));
+    border-radius: 12px;
+    padding: 12px;
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: .04em;
+    text-align: center;
+    outline: none;
+  }
+  .vs {
+    font-family: var(--font-chunky);
+    font-size: 3rem;
+    color: var(--gold);
+    text-shadow: var(--shadow-neon-gold);
+    animation: vsSpin 3s ease-in-out infinite;
+  }
+  @keyframes vsSpin {
+    0%,100% { transform: rotate(-8deg) scale(1); }
+    50%     { transform: rotate(8deg) scale(1.15); }
+  }
+
+  /* ================= END SCREEN ================= */
+  .end-screen {
+    min-height: 92vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 18px; padding: 20px;
+    text-align: center;
+  }
+  .trophy {
+    font-size: clamp(5rem, 15vw, 10rem);
+    filter: drop-shadow(0 0 30px var(--gold));
+    animation: trophySpin 3s ease-in-out infinite;
+  }
+  @keyframes trophySpin {
+    0%,100% { transform: rotate(-10deg) scale(1); }
+    50%     { transform: rotate(10deg) scale(1.1); }
+  }
+  .winner-name {
+    font-family: var(--font-chunky);
+    font-size: clamp(2rem, 5vw, 4rem);
+    background: linear-gradient(135deg, var(--gold), #fff, var(--gold));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--gold));
+  }
+  .final-scores {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 700px;
+    width: 100%;
+  }
+  .final-card {
+    background: rgba(0,0,0,.5);
+    border: 3px solid var(--team-color, var(--cyan));
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 30px var(--team-color, var(--cyan));
+  }
+  .final-card.t1 { --team-color: var(--cyan); }
+  .final-card.t2 { --team-color: var(--magenta); }
+  .final-card .n { font-family: var(--font-display); font-size: 1.4rem; }
+  .final-card .s { font-family: var(--font-chunky); font-size: 3rem; color: var(--gold); text-shadow: var(--shadow-neon-gold); }
+
+  /* Sección help / atajos */
+  .help-tags {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    justify-content: center;
+    font-size: .72rem;
+    font-family: var(--font-body);
+    color: rgba(255,255,255,.55);
+    margin-top: 8px;
+  }
+  .kbd {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.25);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: monospace;
+    color: var(--paper);
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,.85);
+    border: 2px solid var(--gold);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: var(--font-chunky);
+    color: var(--gold);
+    z-index: 200;
+    animation: toastIn .3s, toastOut .3s 1.7s forwards;
+    box-shadow: 0 0 20px var(--gold);
+  }
+  @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  @keyframes toastOut { to { opacity: 0; transform: translate(-50%, 20px); } }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    header.top { grid-template-columns: 1fr; }
+    .logo-wrap { order: -1; }
+    .board { grid-template-columns: 1fr; }
+    .teams-setup { grid-template-columns: 1fr; }
+    .vs { font-size: 2rem; }
+  }
+  @media (max-width: 500px) {
+    .strike-slot { width: 44px; height: 44px; font-size: 1.4rem; }
+    .btn { font-size: .85rem; padding: 10px 14px; }
+    .num-circle { width: 34px; height: 34px; font-size: 1.1rem; }
+    .answer { height: 66px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+<div id="floaters"></div>
+<div id="grid"></div>
+<div id="confetti"></div>
+<div class="top-utils">
+  <button class="util-btn" id="soundBtn" title="Sonido">🔊</button>
+  <button class="util-btn" id="rulesBtn" title="Reglas">?</button>
+</div>
+<div id="app"></div>
+
+<script>
+/* =====================================================================
+   100 METODÓLOGOS DIJERON — ESCOM Edition
+   Datos, lógica y renderizado en JS puro
+   ===================================================================== */
+
+const ROUNDS = [
+  {
+    id: 1,
+    label: "Sirvent · Los 3 planos",
+    question: "Menciona una de las TRES DIMENSIONES del proceso metodológico según María Teresa Sirvent",
+    answers: [
+      { text: "Epistemológica", points: 40, aliases: ["epistemologica","episte","teorica","teorico","conceptual"] },
+      { text: "Estrategia general", points: 35, aliases: ["estrategia","estrategica","diseno","diseño","arquitectura"] },
+      { text: "Técnicas de obtención y análisis", points: 25, aliases: ["tecnica","tecnicas","obtencion","analisis","instrumental","procedimental"] },
+    ],
+  },
+  {
+    id: 2,
+    label: "Sirvent · Dimensión epistemológica",
+    question: "¿Qué COMPONENTE forma parte de la dimensión epistemológica de Sirvent? (el 'qué' se investiga)",
+    answers: [
+      { text: "Planteamiento del problema", points: 24, aliases: ["problema","pregunta","planteamiento","pregunta de investigacion"] },
+      { text: "Hipótesis", points: 22, aliases: ["hipotesis","hipotesi","supuesto"] },
+      { text: "Marco teórico / encuadre conceptual", points: 20, aliases: ["marco","teorico","encuadre","conceptual","referentes"] },
+      { text: "Objetivos de la investigación", points: 18, aliases: ["objetivo","objetivos","metas"] },
+      { text: "Delimitación del objeto de estudio", points: 11, aliases: ["delimitacion","objeto","recorte","recortar"] },
+      { text: "Relevancia científica y social", points: 5, aliases: ["relevancia","justificacion","importancia"] },
+    ],
+  },
+  {
+    id: 3,
+    label: "Tipos por profundidad",
+    question: "Menciona un TIPO de investigación según su PROFUNDIDAD o alcance",
+    answers: [
+      { text: "Descriptiva", points: 28, aliases: ["descriptivo","descriptiva","descripcion"] },
+      { text: "Exploratoria", points: 25, aliases: ["exploratoria","exploratorio","exploracion"] },
+      { text: "Explicativa", points: 22, aliases: ["explicativa","explicativo","causal","causalidad"] },
+      { text: "Correlacional", points: 15, aliases: ["correlacional","correlacion","asociacion"] },
+      { text: "Etnográfica", points: 10, aliases: ["etnografica","etnografico","etnografia"] },
+    ],
+  },
+  {
+    id: 4,
+    label: "Los que 'piensan la teoría'",
+    question: "Menciona un MÉTODO LÓGICO o TEÓRICO de la investigación",
+    answers: [
+      { text: "Hipotético-deductivo", points: 30, aliases: ["hipotetico","hipotetico deductivo","hipoteticodeductivo"] },
+      { text: "Inductivo-deductivo", points: 25, aliases: ["inductivo deductivo","inductivodeductivo","inductivo-deductivo"] },
+      { text: "Analítico-sintético", points: 22, aliases: ["analitico sintetico","analisis sintesis","analitico","sintetico","analisis-sintesis"] },
+      { text: "Inductivo", points: 13, aliases: ["induccion","inductivo"] },
+      { text: "Deductivo", points: 10, aliases: ["deduccion","deductivo"] },
+    ],
+  },
+  {
+    id: 5,
+    label: "Orozco Livia · Las 3 dimensiones",
+    question: "Menciona una de las TRES DIMENSIONES de la metodología según Víctor Orozco Livia",
+    answers: [
+      { text: "Presupuestos ex-ante", points: 35, aliases: ["ex ante","exante","presupuestos","fundamentacion","filosoficos","previos"] },
+      { text: "Lineamientos de la investigación", points: 35, aliases: ["lineamientos","investigacion propiamente","ejecucion","facticos"] },
+      { text: "Método de exposición", points: 30, aliases: ["exposicion","comunicacion","divulgacion","presentacion","comunicar"] },
+    ],
+  },
+  {
+    id: 6,
+    label: "Criterios de clasificación",
+    question: "Menciona un CRITERIO para clasificar tipos de investigación",
+    answers: [
+      { text: "Profundidad", points: 25, aliases: ["profundidad","alcance","nivel"] },
+      { text: "Medición (cuanti / cuali / mixta)", points: 22, aliases: ["medicion","cuantitativa","cualitativa","mixta","enfoque"] },
+      { text: "Manejo de variables", points: 18, aliases: ["variables","manejo","manipulacion"] },
+      { text: "Fuente de datos", points: 15, aliases: ["fuente","datos","documental","campo","fuentes"] },
+      { text: "Extensión", points: 12, aliases: ["extension","alcance poblacional","territorial","poblacion"] },
+      { text: "Objetivos (básica / aplicada)", points: 8, aliases: ["objetivos","basica","aplicada","intervencion","finalidad"] },
+    ],
+  },
+  {
+    id: 7,
+    label: "Métodos empíricos",
+    question: "Menciona un MÉTODO EMPÍRICO de investigación",
+    answers: [
+      { text: "Experimental", points: 40, aliases: ["experimental","experimento","laboratorio"] },
+      { text: "Observacional", points: 35, aliases: ["observacional","observacion"] },
+      { text: "Análisis de contenido", points: 25, aliases: ["analisis de contenido","contenido","documental"] },
+    ],
+  },
+  {
+    id: 8,
+    label: "Cualitativas de campo",
+    question: "Menciona una TÉCNICA CUALITATIVA de obtención de información",
+    answers: [
+      { text: "Entrevista en profundidad", points: 30, aliases: ["entrevista","profundidad","semiestructurada","abierta"] },
+      { text: "Observación participante", points: 28, aliases: ["observacion participante","participante"] },
+      { text: "Registros etnográficos de campo", points: 22, aliases: ["etnograficos","registros","campo","etnografia"] },
+      { text: "Recopilación documental / archivo", points: 20, aliases: ["documental","archivo","recopilacion","documentos"] },
+    ],
+  },
+  {
+    id: 9,
+    label: "Estructurales y de tránsito",
+    question: "Menciona un MÉTODO ESTRUCTURAL o de TRÁNSITO CONCEPTUAL",
+    answers: [
+      { text: "Histórico-lógico", points: 28, aliases: ["historico logico","historico","logico","historico-logico"] },
+      { text: "Abstracto-concreto", points: 25, aliases: ["abstracto concreto","abstracto","concreto"] },
+      { text: "Sistémico-estructural-funcional", points: 22, aliases: ["sistemico","estructural","funcional","sistemas"] },
+      { text: "Genético", points: 15, aliases: ["genetico","celula basica","origen"] },
+      { text: "Modelación", points: 10, aliases: ["modelacion","modelado","modelo"] },
+    ],
+  },
+  {
+    id: 10,
+    label: "Orozco · Presupuestos ex-ante",
+    question: "Menciona un PRESUPUESTO EX-ANTE según Orozco Livia",
+    answers: [
+      { text: "Principios filosóficos", points: 30, aliases: ["filosoficos","filosofia","raciocinio"] },
+      { text: "Principios epistemológicos", points: 28, aliases: ["epistemologicos","episte","conocimiento"] },
+      { text: "Concepción científica del mundo", points: 22, aliases: ["concepcion","cientifica","mundo","cosmovision"] },
+      { text: "Ideología del investigador", points: 20, aliases: ["ideologia","posicion","postura"] },
+    ],
+  },
+];
+
+/* ------- Utilidades ------- */
+const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+const norm = s => s.toString().toLowerCase()
+  .normalize("NFD").replace(/[̀-ͯ]/g,"")
+  .replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
+
+function checkMatch(input, ans) {
+  const ni = norm(input);
+  if (!ni) return false;
+  const targets = [norm(ans.text), ...(ans.aliases||[]).map(norm)];
+  for (const t of targets) {
+    if (!t) continue;
+    if (ni === t) return true;
+    if (t.includes(ni) && ni.length >= 3) return true;
+    if (ni.includes(t) && t.length >= 3) return true;
+  }
+  // por palabras
+  const iw = ni.split(" ");
+  const tw = norm(ans.text).split(" ");
+  const hit = iw.filter(w => tw.some(a => a.length>=3 && (a.includes(w) || w.includes(a)))).length;
+  return hit >= Math.max(1, Math.ceil(tw.length * 0.5));
+}
+
+/* ------- Audio (Web Audio API) ------- */
+let audioCtx = null;
+let muted = false;
+function ensureAudio() {
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch(e) { audioCtx = null; }
+  }
+  if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+}
+function beep({freq=440, dur=.2, type="sine", vol=.25, sweep=null, delay=0}={}) {
+  if (muted) return;
+  ensureAudio(); if (!audioCtx) return;
+  const t0 = audioCtx.currentTime + delay;
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  if (sweep) osc.frequency.exponentialRampToValueAtTime(Math.max(30, sweep), t0 + dur);
+  g.gain.setValueAtTime(0, t0);
+  g.gain.linearRampToValueAtTime(vol, t0 + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+  osc.connect(g).connect(audioCtx.destination);
+  osc.start(t0); osc.stop(t0 + dur + .02);
+}
+function playApplause(dur=1.5) {
+  if (muted) return;
+  ensureAudio(); if (!audioCtx) return;
+  const bufSize = audioCtx.sampleRate * dur;
+  const buffer = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i=0;i<bufSize;i++) {
+    const env = Math.min(1, i/(audioCtx.sampleRate*.15)) * Math.max(0, 1 - i/bufSize);
+    data[i] = (Math.random()*2-1) * env * 0.35;
+  }
+  const src = audioCtx.createBufferSource();
+  src.buffer = buffer;
+  const filt = audioCtx.createBiquadFilter();
+  filt.type = "bandpass"; filt.frequency.value = 2200; filt.Q.value = .8;
+  const g = audioCtx.createGain(); g.gain.value = .5;
+  src.connect(filt).connect(g).connect(audioCtx.destination);
+  src.start();
+}
+const sfx = {
+  correct: () => { beep({freq:660,type:"square",dur:.09,vol:.2});
+                   beep({freq:990,type:"square",dur:.12,vol:.2,delay:.09});
+                   beep({freq:1320,type:"square",dur:.2,vol:.2,delay:.21}); },
+  wrong:   () => { beep({freq:220,type:"sawtooth",dur:.5,vol:.3,sweep:80}); },
+  win:     () => { const notes=[523,659,784,1046]; notes.forEach((f,i)=>beep({freq:f,type:"triangle",dur:.28,vol:.25,delay:i*.15})); playApplause(1.6); },
+  buzz:    () => { beep({freq:120,type:"square",dur:.35,vol:.35}); },
+  reveal:  () => { beep({freq:880,type:"triangle",dur:.15,vol:.2}); },
+  tick:    () => { beep({freq:1200,type:"square",dur:.03,vol:.08}); },
+  epic:    () => { const notes=[261,329,392,523,659,784,1046]; notes.forEach((f,i)=>beep({freq:f,type:"triangle",dur:.28,vol:.25,delay:i*.12})); playApplause(2.4); },
+};
+
+/* ------- Fondo: estrellas ------- */
+(function makeStars() {
+  const c = $("#stars");
+  const N = 80;
+  for (let i=0;i<N;i++) {
+    const s = document.createElement("div");
+    s.className = "star";
+    const size = 1 + Math.random()*2.5;
+    s.style.width = s.style.height = size + "px";
+    s.style.left = Math.random()*100 + "%";
+    s.style.top  = Math.random()*100 + "%";
+    s.style.setProperty("--dur", (1.5 + Math.random()*4)+"s");
+    s.style.animationDelay = (Math.random()*4)+"s";
+    c.appendChild(s);
+  }
+})();
+
+/* ------- Fondo: emojis de ciencia flotando ------- */
+(function makeFloaters() {
+  const c = $("#floaters");
+  const emojis = ["📚","🔬","🧪","🧠","⚗️","📐","📊","🎓","📖","⚛️","🧬","💡","🔭","📝","🎯","📈"];
+  const N = 22;
+  for (let i=0;i<N;i++) {
+    const el = document.createElement("div");
+    el.className = "floater";
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100 + "%";
+    el.style.fontSize = (1 + Math.random()*1.8) + "rem";
+    el.style.opacity = (0.06 + Math.random()*0.10).toFixed(2);
+    const dur = 20 + Math.random()*35;
+    el.style.animationDuration = dur + "s";
+    el.style.animationDelay = -(Math.random()*dur) + "s";
+    c.appendChild(el);
+  }
+})();
+
+/* ------- Screen shake ------- */
+function screenShake() {
+  document.body.classList.remove("shake");
+  void document.body.offsetWidth;
+  document.body.classList.add("shake");
+  setTimeout(()=>document.body.classList.remove("shake"), 500);
+}
+
+/* ------- Modal de reglas ------- */
+function openRules() {
+  if ($(".modal")) return;
+  const m = document.createElement("div");
+  m.className = "modal";
+  m.innerHTML = `
+    <div class="modal-card">
+      <div class="modal-title">📜 Reglas del juego</div>
+      <div class="modal-body">
+        <p><b>El juego:</b> dos equipos, diez rondas, tres strikes por ronda. Adivinan las respuestas más votadas por los <i>metodólogos</i> (o sea, las que el material bibliográfico prioriza).</p>
+        <ul>
+          <li><b>Turno:</b> el equipo en turno grita la respuesta. Si acierta, se revela y suma esos puntos al <span style="color:var(--green)">pool de la ronda</span>.</li>
+          <li><b>Strikes:</b> tres fallos y el otro equipo tiene <b>UNA</b> oportunidad para <span style="color:var(--magenta)">ROBAR</span> todo el pool con una sola respuesta correcta.</li>
+          <li><b>Ronda ganada:</b> al revelar todas las respuestas o al robar/quedarse con el pool, los puntos se consolidan en el marcador global.</li>
+          <li><b>Rondas 9 y 10 = <span style="color:var(--gold)">DOBLE PUNTOS</span></b> (drama final).</li>
+        </ul>
+        <p><b>Para el presentador:</b> puedes revelar respuestas haciendo click, tecleando en el input o usando atajos:</p>
+        <ul>
+          <li><span class="kbd">1</span>–<span class="kbd">9</span> revelar respuesta n</li>
+          <li><span class="kbd">Espacio</span> strike</li>
+          <li><span class="kbd">Tab</span> cambiar equipo activo</li>
+          <li><span class="kbd">R</span> robar (cuando hay 3 strikes)</li>
+          <li><span class="kbd">N</span> siguiente ronda</li>
+        </ul>
+      </div>
+      <div class="modal-close-row">
+        <button class="btn btn-primary" id="closeRules">ENTENDIDO</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(m);
+  const close = () => m.remove();
+  $("#closeRules").onclick = close;
+  m.addEventListener("click", e => { if (e.target === m) close(); });
+}
+
+/* ------- Round splash (transición) ------- */
+function showRoundSplash(roundIdx, cb) {
+  const r = ROUNDS[roundIdx];
+  const isDouble = roundIdx >= 8;
+  const el = document.createElement("div");
+  el.className = "round-splash";
+  el.innerHTML = `
+    <div class="splash-label">RONDA</div>
+    <div class="splash-num">${roundIdx+1}${isDouble ? " ×2" : ""}</div>
+    <div class="splash-topic">${escapeHTML(r.label)}</div>
+  `;
+  document.body.appendChild(el);
+  sfx.reveal();
+  if (isDouble) setTimeout(()=>sfx.correct(), 200);
+  setTimeout(()=>{
+    el.style.transition = "opacity .3s";
+    el.style.opacity = "0";
+    setTimeout(()=>{ el.remove(); if (cb) cb(); }, 300);
+  }, 1400);
+}
+
+/* ------- Round win banner ------- */
+function showRoundWin(teamName, poolPts, isDouble) {
+  const el = document.createElement("div");
+  el.className = "round-win-banner";
+  el.innerHTML = `¡RONDA GANADA!<br><span style="font-size:.65em">${escapeHTML(teamName)} · +${poolPts}${isDouble?" (×2)":""} pts</span>`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2700);
+}
+
+/* ------- Confeti ------- */
+function confettiBurst(intensity=80, colors=null) {
+  const container = $("#confetti");
+  const palette = colors || ["#FFD700","#FF006E","#00E5FF","#00FF88","#FFA500","#FFFFFF"];
+  for (let i=0;i<intensity;i++) {
+    const p = document.createElement("div");
+    p.className = "confetti-piece";
+    p.style.left = Math.random()*100+"vw";
+    p.style.background = palette[Math.floor(Math.random()*palette.length)];
+    p.style.width  = (6 + Math.random()*10) + "px";
+    p.style.height = (10 + Math.random()*18) + "px";
+    p.style.opacity = .7 + Math.random()*.3;
+    p.style.animationDuration = (2.5 + Math.random()*2.5) + "s";
+    p.style.animationDelay = (Math.random()*.4) + "s";
+    p.style.transform = `rotate(${Math.random()*360}deg)`;
+    container.appendChild(p);
+    setTimeout(()=>p.remove(), 5500);
+  }
+}
+
+/* ------- Toast ------- */
+function toast(msg) {
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2000);
+}
+
+/* ------- Overlay X gigante ------- */
+function showStrikeOverlay() {
+  const o = document.createElement("div");
+  o.className = "overlay";
+  o.innerHTML = `<div class="giant-x">✕</div>`;
+  document.body.appendChild(o);
+  setTimeout(()=>{ o.style.opacity="0"; setTimeout(()=>o.remove(), 250); }, 700);
+}
+
+/* ============ ESTADO ============ */
+const state = {
+  screen: "title", // title | round | end
+  teams: [
+    { name: "Los Popperianos", emoji: "🧠", score: 0, roundPts: 0, color: "cyan" },
+    { name: "Los Kuhnianos",   emoji: "🔬", score: 0, roundPts: 0, color: "magenta" },
+  ],
+  activeTeam: 0,
+  roundIdx: 0,
+  revealed: [],
+  strikes: 0,
+  roundOver: false,
+  stealMode: false,
+  revealAll: false,
+  pool: 0, // puntos acumulados por la ronda antes de consolidar
+  winningTeam: -1, // quién ganó la ronda (para banner y consolidación con multiplicador)
+};
+const MAX_STRIKES = 3;
+function isDoubleRound(idx = state.roundIdx) { return idx >= 8; } // rondas 9 y 10
+function roundMultiplier(idx = state.roundIdx) { return isDoubleRound(idx) ? 2 : 1; }
+
+/* ============ RENDER ============ */
+function render() {
+  const app = $("#app");
+  app.innerHTML = "";
+  if (state.screen === "title") renderTitle(app);
+  else if (state.screen === "round") renderRound(app);
+  else if (state.screen === "end") renderEnd(app);
+}
+
+/* ---- Title Screen ---- */
+const EMOJIS_1 = ["🧠","🔬","💻","🚀","⚡","🐍","🤖","🎓","📚","🎯"];
+const EMOJIS_2 = ["🔥","💡","🦾","🧪","⚙️","👾","🎮","🌌","🧬","🎲"];
+
+function renderTitle(root) {
+  root.innerHTML = `
+    <div class="title-screen">
+      <div class="title-badge">ESCOM · Metodología</div>
+      <div class="title-huge">100 METODÓLOGOS<br>DIJERON</div>
+      <p class="title-tag">Dos equipos, diez rondas, tres strikes por ronda.<br>
+      Adivina las respuestas más votadas por los sabios de la investigación científica.</p>
+
+      <div class="teams-setup">
+        <div class="team-input-card t1">
+          <div class="emoji-picker" id="pick1"></div>
+          <input id="name1" value="${state.teams[0].name}" maxlength="24">
+        </div>
+        <div class="vs">VS</div>
+        <div class="team-input-card t2">
+          <div class="emoji-picker" id="pick2"></div>
+          <input id="name2" value="${state.teams[1].name}" maxlength="24">
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="startBtn">¡QUE COMIENCE EL JUEGO!</button>
+      <div class="help-tags">
+        <span>Atajos:</span>
+        <span><span class="kbd">1-9</span> revelar respuesta</span>
+        <span><span class="kbd">Espacio</span> strike</span>
+        <span><span class="kbd">Tab</span> cambiar equipo</span>
+        <span><span class="kbd">Enter</span> siguiente</span>
+      </div>
+    </div>
+  `;
+
+  // Emoji pickers
+  const pick = (containerId, list, teamIdx) => {
+    const c = $(containerId);
+    list.forEach(e => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "emoji-btn" + (state.teams[teamIdx].emoji===e ? " selected" : "");
+      b.textContent = e;
+      b.onclick = () => {
+        state.teams[teamIdx].emoji = e;
+        $$(containerId+" .emoji-btn").forEach(x=>x.classList.remove("selected"));
+        b.classList.add("selected");
+      };
+      c.appendChild(b);
+    });
+  };
+  pick("#pick1", EMOJIS_1, 0);
+  pick("#pick2", EMOJIS_2, 1);
+
+  $("#startBtn").onclick = () => {
+    state.teams[0].name = $("#name1").value.trim() || "Equipo 1";
+    state.teams[1].name = $("#name2").value.trim() || "Equipo 2";
+    state.teams[0].score = 0; state.teams[1].score = 0;
+    state.teams[0].roundPts = 0; state.teams[1].roundPts = 0;
+    state.roundIdx = 0;
+    state.revealed = []; state.strikes = 0; state.roundOver = false;
+    state.stealMode = false; state.revealAll = false;
+    state.pool = 0; state.winningTeam = -1;
+    state.activeTeam = 0;
+    state.screen = "round";
+    ensureAudio(); sfx.reveal();
+    showRoundSplash(0, () => render());
+  };
+}
+
+/* ---- Round Screen ---- */
+function renderRound(root) {
+  const r = ROUNDS[state.roundIdx];
+  const t1 = state.teams[0], t2 = state.teams[1];
+  const doubleCol = r.answers.length > 3 ? "" : "single-col";
+
+  root.innerHTML = `
+    <header class="top">
+      <div class="scoreboard team-1 ${state.activeTeam===0 && !state.roundOver ? "active" : ""}">
+        ${state.activeTeam===0 && !state.roundOver ? '<div class="active-badge">EN TURNO</div>' : ""}
+        <div class="team-row">
+          <div class="team-emoji">${t1.emoji}</div>
+          <div class="team-name">${escapeHTML(t1.name)}</div>
+        </div>
+        <div class="team-score-row">
+          <div class="team-score" id="score-0">${t1.score}</div>
+          ${state.roundOver && state.winningTeam===0 && state.pool>0 ? `<div class="team-round-pts">+${state.pool*roundMultiplier()} esta ronda${roundMultiplier()>1?" (×2)":""}</div>` : ""}
+        </div>
+      </div>
+
+      <div class="logo-wrap">
+        <div class="logo-main">100 METODÓLOGOS</div>
+        <div class="logo-sub">DIJERON</div>
+        <div class="round-chip">RONDA ${state.roundIdx+1} / ${ROUNDS.length}</div>
+        ${isDoubleRound() ? `<div class="double-chip">⚡ DOBLE PUNTOS ⚡</div>` : ""}
+        ${state.pool>0 && !state.roundOver ? `<div class="pool-chip">POOL: ${state.pool} pts</div>` : ""}
+      </div>
+
+      <div class="scoreboard team-2 ${state.activeTeam===1 && !state.roundOver ? "active" : ""}">
+        ${state.activeTeam===1 && !state.roundOver ? '<div class="active-badge">EN TURNO</div>' : ""}
+        <div class="team-row">
+          <div class="team-emoji">${t2.emoji}</div>
+          <div class="team-name">${escapeHTML(t2.name)}</div>
+        </div>
+        <div class="team-score-row">
+          <div class="team-score" id="score-1">${t2.score}</div>
+          ${state.roundOver && state.winningTeam===1 && state.pool>0 ? `<div class="team-round-pts">+${state.pool*roundMultiplier()} esta ronda${roundMultiplier()>1?" (×2)":""}</div>` : ""}
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="question-card">
+        <div class="question-label">${escapeHTML(r.label)}</div>
+        <div class="question-text">${escapeHTML(r.question)}</div>
+      </div>
+
+      <div class="board ${doubleCol}" id="board">
+        ${r.answers.map((a,i)=>renderAnswer(a,i)).join("")}
+      </div>
+
+      <div class="strikes" id="strikes">
+        ${[0,1,2].map(i=>`<div class="strike-slot ${i<state.strikes?'on':''}">${i<state.strikes?'✕':''}</div>`).join("")}
+      </div>
+
+      <div class="feedback" id="feedback">&nbsp;</div>
+
+      ${renderControls(r)}
+
+      <div class="help-tags">
+        <span><span class="kbd">1-${r.answers.length}</span> revelar</span>
+        <span><span class="kbd">Espacio</span> strike</span>
+        <span><span class="kbd">Tab</span> cambiar equipo</span>
+        <span><span class="kbd">R</span> robar</span>
+        <span><span class="kbd">N</span> siguiente</span>
+      </div>
+    </main>
+  `;
+
+  // Bind clicks en respuestas
+  $$(".answer").forEach((el, i) => {
+    el.addEventListener("click", () => revealAnswer(i));
+  });
+
+  bindControls(r);
+}
+
+function renderAnswer(a, i) {
+  const revealed = state.revealed.includes(i) || state.revealAll;
+  return `
+    <div class="answer ${revealed?'revealed':''}" data-idx="${i}">
+      <div class="face face-front">
+        <div class="num-circle">${i+1}</div>
+        <div class="hidden-marks">— — — — —</div>
+      </div>
+      <div class="face face-back">
+        <div class="num-circle">${i+1}</div>
+        <div class="answer-text">${escapeHTML(a.text)}</div>
+        <div class="answer-pts">${a.points}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderControls(r) {
+  if (state.roundOver) {
+    const isLast = state.roundIdx + 1 >= ROUNDS.length;
+    return `
+      <div class="controls">
+        <button class="btn btn-primary" id="nextBtn">${isLast ? "VER RESULTADO FINAL 🏆" : "SIGUIENTE RONDA →"}</button>
+      </div>
+    `;
+  }
+
+  const showSteal = state.strikes >= MAX_STRIKES && !state.stealMode && state.revealed.length < r.answers.length;
+
+  return `
+    <div class="input-row">
+      <input id="guessInput" placeholder="Adivina en voz alta o escribe la respuesta…" autocomplete="off">
+      <button class="btn btn-primary" id="guessBtn">RESPONDER</button>
+    </div>
+    <div class="controls">
+      <button class="btn btn-team t1 ${state.activeTeam===0?'active':''}" data-team="0">${state.teams[0].emoji} ${escapeHTML(state.teams[0].name)}</button>
+      <button class="btn btn-team t2 ${state.activeTeam===1?'active':''}" data-team="1">${state.teams[1].emoji} ${escapeHTML(state.teams[1].name)}</button>
+      <button class="btn btn-strike" id="strikeBtn">✕ STRIKE</button>
+      ${showSteal ? `<button class="btn btn-steal" id="stealBtn">🎯 ${escapeHTML(state.teams[1-state.activeTeam].name)} ROBA</button>` : ""}
+      <button class="btn btn-ghost" id="skipBtn">Terminar ronda</button>
+    </div>
+  `;
+}
+
+function bindControls(r) {
+  if (state.roundOver) {
+    $("#nextBtn").onclick = nextRound;
+    return;
+  }
+  const gi = $("#guessInput");
+  gi.focus();
+  gi.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); handleGuess(gi.value); gi.value=""; }
+  });
+  $("#guessBtn").onclick = () => { handleGuess(gi.value); gi.value=""; gi.focus(); };
+  $("#strikeBtn").onclick = () => doStrike();
+  $$(".btn-team").forEach(b => b.onclick = () => { state.activeTeam = +b.dataset.team; render(); });
+  const stealBtn = $("#stealBtn"); if (stealBtn) stealBtn.onclick = () => enterStealMode();
+  $("#skipBtn").onclick = () => finishRound();
+}
+
+/* ------- Lógica ------- */
+function handleGuess(text) {
+  if (!text || !text.trim() || state.roundOver) return;
+  const r = ROUNDS[state.roundIdx];
+  let matchIdx = -1;
+  for (let i=0;i<r.answers.length;i++) {
+    if (!state.revealed.includes(i) && checkMatch(text, r.answers[i])) { matchIdx=i; break; }
+  }
+  if (matchIdx>=0) revealAnswer(matchIdx);
+  else doStrike();
+}
+
+function revealAnswer(i) {
+  if (state.roundOver) return;
+  if (state.revealed.includes(i)) return;
+  const r = ROUNDS[state.roundIdx];
+  const a = r.answers[i];
+  state.revealed.push(i);
+
+  // el pool crece con cada acierto; se consolida al final al ganador
+  state.pool += a.points;
+  state.winningTeam = state.activeTeam;
+
+  sfx.correct();
+  const mult = roundMultiplier();
+  const shownPts = a.points * mult;
+  flashFeedback(`¡${a.text}! +${shownPts} pts para el pool${mult>1?" (×2)":""}`, "correct");
+
+  render();
+  animateScore(state.activeTeam);
+  confettiBurst(30, state.activeTeam===0 ? ["#00E5FF","#00B8D4","#FFD700","#FFFFFF"] : ["#FF006E","#C2185B","#FFD700","#FFFFFF"]);
+
+  // ¿completó todas?
+  if (state.revealed.length === r.answers.length) {
+    setTimeout(() => {
+      flashFeedback("¡TODAS LAS RESPUESTAS! 🎉", "perfect");
+      sfx.win();
+      confettiBurst(180);
+      finishRound({ perfect: true });
+    }, 700);
+  }
+  // si estaba en modo robo, con acertar 1 basta: se lleva todo
+  else if (state.stealMode) {
+    setTimeout(() => {
+      flashFeedback(`¡ROBO EXITOSO por ${state.teams[state.activeTeam].name}!`, "perfect");
+      sfx.win();
+      confettiBurst(150);
+      finishRound({ stolen: true });
+    }, 600);
+  }
+}
+
+function doStrike() {
+  if (state.roundOver) return;
+  if (state.stealMode) {
+    // el robo falla: el equipo original conserva el pool
+    sfx.buzz();
+    showStrikeOverlay();
+    screenShake();
+    flashFeedback("¡Robo fallido! El pool se queda con el equipo original.", "wrong");
+    state.activeTeam = 1 - state.activeTeam; // regresa al equipo original
+    state.winningTeam = state.activeTeam;
+    setTimeout(() => finishRound({ stealFailed: true }), 900);
+    return;
+  }
+
+  state.strikes++;
+  sfx.wrong();
+  showStrikeOverlay();
+  screenShake();
+  flashFeedback(`¡STRIKE ${state.strikes}! ✕`, "wrong");
+  render();
+
+  if (state.strikes >= MAX_STRIKES) {
+    flashFeedback(`3 strikes. ${state.teams[1-state.activeTeam].name} puede ROBAR con una sola respuesta.`, "wrong");
+  }
+}
+
+function enterStealMode() {
+  state.stealMode = true;
+  state.activeTeam = 1 - state.activeTeam;
+  toast(`🎯 ${state.teams[state.activeTeam].name} tiene 1 intento para robar`);
+  sfx.tick();
+  render();
+}
+
+function finishRound(opts = {}) {
+  state.roundOver = true;
+  state.revealAll = true;
+  // Consolidar: aplicar multiplicador y sumar SOLO al equipo ganador
+  const mult = roundMultiplier();
+  const winner = state.winningTeam;
+  const consolidated = state.pool * mult;
+  if (winner >= 0 && consolidated > 0) {
+    state.teams[winner].roundPts = consolidated;
+    state.teams[winner].score += consolidated;
+    animateScore(winner);
+    showRoundWin(state.teams[winner].name, state.pool, mult>1);
+    if (opts.perfect) confettiBurst(100);
+    if (opts.perfect || opts.stolen) setTimeout(()=>confettiBurst(140), 400);
+  }
+  sfx.reveal();
+  render();
+}
+
+function nextRound() {
+  if (state.roundIdx + 1 >= ROUNDS.length) {
+    state.screen = "end";
+    render();
+    setTimeout(() => confettiBurst(300), 200);
+    setTimeout(() => sfx.epic(), 100);
+    return;
+  }
+  state.roundIdx++;
+  state.revealed = [];
+  state.strikes = 0;
+  state.roundOver = false;
+  state.stealMode = false;
+  state.revealAll = false;
+  state.pool = 0;
+  state.winningTeam = -1;
+  state.teams.forEach(t => t.roundPts = 0);
+  // el equipo que menos puntos tiene inicia con turno (fairness)
+  state.activeTeam = state.teams[0].score <= state.teams[1].score ? 0 : 1;
+  showRoundSplash(state.roundIdx, () => render());
+}
+
+function animateScore(idx) {
+  const el = $(`#score-${idx}`);
+  if (!el) return;
+  el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump");
+}
+
+function flashFeedback(msg, type="correct") {
+  const el = $("#feedback");
+  if (!el) return;
+  el.textContent = msg;
+  el.className = "feedback " + type;
+}
+
+/* ---- End Screen ---- */
+function renderEnd(root) {
+  const [t1,t2] = state.teams;
+  let winner = null;
+  if (t1.score > t2.score) winner = t1;
+  else if (t2.score > t1.score) winner = t2;
+  root.innerHTML = `
+    <div class="end-screen">
+      <div class="trophy">${winner ? "🏆" : "🤝"}</div>
+      <div class="winner-name">${winner ? "¡GANA "+escapeHTML(winner.name.toUpperCase())+"!" : "¡EMPATE ÉPICO!"}</div>
+      <div class="final-scores">
+        <div class="final-card t1">
+          <div class="team-emoji" style="font-size:2.4rem">${t1.emoji}</div>
+          <div class="n">${escapeHTML(t1.name)}</div>
+          <div class="s">${t1.score}</div>
+        </div>
+        <div class="final-card t2">
+          <div class="team-emoji" style="font-size:2.4rem">${t2.emoji}</div>
+          <div class="n">${escapeHTML(t2.name)}</div>
+          <div class="s">${t2.score}</div>
+        </div>
+      </div>
+      <p class="title-tag">${winner ? "El equipo demostró conocer las <b>dimensiones</b>, los <b>métodos</b> y todos los rincones de la metodología científica." : "Ambos equipos empatan — sin duda, dominan la metodología a la par."}</p>
+      <div class="controls">
+        <button class="btn btn-primary" id="againBtn">JUGAR OTRA VEZ</button>
+        <button class="btn btn-ghost" id="menuBtn">Cambiar equipos</button>
+      </div>
+    </div>
+  `;
+  $("#againBtn").onclick = () => {
+    state.teams.forEach(t=>{ t.score=0; t.roundPts=0; });
+    state.roundIdx=0; state.revealed=[]; state.strikes=0; state.roundOver=false; state.stealMode=false; state.revealAll=false;
+    state.activeTeam=0; state.screen="round"; render();
+  };
+  $("#menuBtn").onclick = () => { state.screen = "title"; render(); };
+}
+
+/* ---- Keybinds globales ---- */
+document.addEventListener("keydown", e => {
+  if (state.screen !== "round") {
+    if (state.screen === "end" && e.key === "Enter") { $("#againBtn")?.click(); }
+    return;
+  }
+  const inField = e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA";
+  // números para revelar respuestas incluso mientras se escribe SOLO si Ctrl/Alt
+  if (!inField) {
+    if (e.key === " ") { e.preventDefault(); doStrike(); }
+    else if (e.key === "Tab") { e.preventDefault(); state.activeTeam = 1 - state.activeTeam; render(); }
+    else if (e.key.toLowerCase() === "r") {
+      if (state.strikes >= MAX_STRIKES && !state.stealMode) { e.preventDefault(); enterStealMode(); }
+    }
+    else if (e.key.toLowerCase() === "n") {
+      if (state.roundOver) { e.preventDefault(); nextRound(); }
+    }
+    else if (/^[1-9]$/.test(e.key)) {
+      const i = parseInt(e.key,10) - 1;
+      const r = ROUNDS[state.roundIdx];
+      if (i < r.answers.length) { e.preventDefault(); revealAnswer(i); }
+    }
+  } else {
+    if (e.key === "Enter") { /* input tiene su handler propio */ }
+  }
+});
+
+/* ---- Utils ---- */
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* ---- Utility buttons ---- */
+$("#soundBtn").onclick = () => {
+  muted = !muted;
+  $("#soundBtn").textContent = muted ? "🔇" : "🔊";
+  if (!muted) sfx.tick();
+};
+$("#rulesBtn").onclick = () => openRules();
+
+/* ---- Init ---- */
+render();
+</script>
+</body>
+</html>
